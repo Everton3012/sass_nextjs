@@ -1,0 +1,49 @@
+'use client';
+import { useState } from "react";
+import Link from "next/link";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger
+} from "@/components/ui/sheet";
+import { Button } from "../../../components/ui/button";
+import { Menu } from "lucide-react";
+import { NavLinks } from "@/data/NavLinks";
+
+
+export function Header() {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <header className="fixed top-0 right-0 left-0 z-[999] py-4 px-6 bg-white">
+            <div className="container mx-auto flex items-center justify-between">
+                <Link rel="stylesheet" href="/" className="text-3xl font-bold text-zinc-900">Odonto<span className="text-emerald-500">PRO</span></Link>
+                <nav className="hidden md:flex items-center">
+                    <NavLinks isOpen={() => setIsOpen(false)} />
+                </nav>
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <SheetTrigger asChild className="md:hidden">
+                        <Button variant={"ghost"} size={"icon"} className="text-black hover:bg-transparent cursor-pointer">
+                            <Menu className="w-6 h-6" />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right" className="w-[240px] sm:w-[300px] z-[9999]">
+                        <SheetHeader>
+                            <SheetTitle>Menu</SheetTitle>
+                            <SheetDescription>
+                                Veja nosso menu
+                            </SheetDescription>
+                        </SheetHeader>
+                        <nav>
+                            <NavLinks isOpen={() => setIsOpen(false)} />
+                        </nav>
+                    </SheetContent>
+                </Sheet>
+            </div>
+        </header>
+    );
+}
