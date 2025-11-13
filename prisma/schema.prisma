@@ -13,3 +13,140 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  address       String?         @default("")
+  phone         String?         @default("")
+  status        Boolean         @default(true)
+  timeZone      String? 
+  stripe_customer_id String? 
+  subscription  Subscription?
+  services      Service[]
+  reminders     Reminder[]
+  appointments  Appointment[]
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+
+model Appointment {
+  id            String         @id @default(cuid())
+  name          String
+  email         String        
+  phone         String         @default("")
+  appointmentDate DateTime
+  time String
+
+  serviceId   String
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+
+model Reminder {
+  id         String   @id @default(cuid())
+  description String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt 
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  price       Int      // price in cents  
+  duration    Int      // duration in minutes
+  status      Boolean  @default(true)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  apointment Appointment[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt 
+}
+
+enum Plan {
+  BASIC
+  PROFESSIONAL
+}
+ 
+model Subscription {
+  id                String    @id @default(uuid())
+  status            String
+  plan              Plan      
+  priceId           String
+
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  userId         String    @unique
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String           @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String   @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([userId, credentialID])
+}
