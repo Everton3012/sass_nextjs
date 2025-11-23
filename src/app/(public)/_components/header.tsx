@@ -38,7 +38,7 @@ export function Header() {
                                 Veja nosso menu
                             </SheetDescription>
                         </SheetHeader>
-                        <nav className="flex flex-col space-y-4 mt-6">
+                        <nav className="flex flex-col space-y-4 mt-6 px-10">
                             <NavLinks isOpen={() => setIsOpen(false)} />
                         </nav>
                     </SheetContent>
