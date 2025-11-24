@@ -1,6 +1,14 @@
+import getSession from '@/lib/getSession';
 import SidebarDashboard from './_components/sidebar'
+import { redirect } from 'next/navigation';
 
-const DashboardLayout = ({ children, }: { children: React.ReactNode }) => {
+const DashboardLayout = async ({ children, }: { children: React.ReactNode }) => {
+    const session = await getSession();
+
+    if (!session) {
+      redirect('/login');
+    }
+  
     return (
         <>
             <SidebarDashboard >

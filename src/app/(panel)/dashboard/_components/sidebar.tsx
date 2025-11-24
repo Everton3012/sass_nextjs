@@ -38,7 +38,7 @@ const SidebarDashboard = ({ children }: { children: React.ReactNode }) => {
                     <nav className="flex flex-col gap-1 overflow-hidden mt-2">
                         <SidebarLink href={"/dashboard"} icon={<CalendarCheck2 className="w-6 h-6" />} label={"Agendamentos"} pathname={pathname} isopen={isOpen} />
                         <SidebarLink href={"/dashboard/services"} icon={<Folder className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
-                        <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
+                        <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Perfil"} pathname={pathname} isopen={isOpen} />
                         <SidebarLink href={"/dashboard/plans"} icon={<Banknote className="w-6 h-6" />} label={"Planos"} pathname={pathname} isopen={isOpen} />
                     </nav>
                 )}
@@ -51,7 +51,7 @@ const SidebarDashboard = ({ children }: { children: React.ReactNode }) => {
                             </span>
                             <SidebarLink href={"/dashboard"} icon={<CalendarCheck2 className="w-6 h-6" />} label={"Agendamentos"} pathname={pathname} isopen={isOpen} />
                             <SidebarLink href={"/dashboard/services"} icon={<Folder className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
-                            <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
+                            <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Perfil"} pathname={pathname} isopen={isOpen} />
                             <SidebarLink href={"/dashboard/plans"} icon={<Banknote className="w-6 h-6" />} label={"Planos"} pathname={pathname} isopen={isOpen} />
 
                         </nav>
@@ -83,7 +83,7 @@ const SidebarDashboard = ({ children }: { children: React.ReactNode }) => {
                             <nav className="grid gap-2 text-base pt-5">
                                 <SidebarLink href={"/dashboard"} icon={<CalendarCheck2 className="w-6 h-6" />} label={"Agendamentos"} pathname={pathname} isopen={isOpen} />
                                 <SidebarLink href={"/dashboard/services"} icon={<Folder className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
-                                <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Serviços"} pathname={pathname} isopen={isOpen} />
+                                <SidebarLink href={"/dashboard/profile"} icon={<Settings className="w-6 h-6" />} label={"Perfil"} pathname={pathname} isopen={isOpen} />
                                 <SidebarLink href={"/dashboard/plans"} icon={<Banknote className="w-6 h-6" />} label={"Planos"} pathname={pathname} isopen={isOpen} />
                             </nav>
                         </SheetContent>

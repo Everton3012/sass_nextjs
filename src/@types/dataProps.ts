@@ -1,0 +1,3 @@
+interface GetUserDataProps {
+    userId: string;
+}
