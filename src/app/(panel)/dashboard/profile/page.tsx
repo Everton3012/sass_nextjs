@@ -1,3 +1,4 @@
+import ProfileContent from "./_components/profile";
 import { getUserData } from "./_data-access/get-info-user";
 import getSession from "@/lib/getSession";
 
@@ -9,7 +10,7 @@ const Profile = async () => {
   
 
   return (
-    <div>{user?.name}</div>
+    <ProfileContent />
   )
 }
 
